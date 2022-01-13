@@ -1,0 +1,31 @@
+.header {
+  background-color: #5e2073;
+  color: #fff;
+  padding: 2rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.nav {
+  display: flex;
+  list-style: none;
+}
+
+.nav li {
+  margin-right: 2.5rem;
+}
+
+.link:link,
+.link:visited {
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.link:hover,
+.link:active,
+.active {
+  color: #cc90e0;
+}

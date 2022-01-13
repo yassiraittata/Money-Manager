@@ -1,0 +1,28 @@
+.element {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr 0.5fr;
+  align-items: center;
+
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.expense h3,
+.expense p {
+  color: #f7615a;
+}
+
+.income h3,
+.income p {
+  color: #00ab00;
+}
+
+a {
+  font-size: 1.5rem;
+  color: #5e2073;
+  text-decoration: none;
+  justify-self: center;
+  align-self: baseline;
+}

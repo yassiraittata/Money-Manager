@@ -1,0 +1,29 @@
+.transactions_list {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.header__selects {
+  display: flex;
+}
+
+.header__selects select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+
+.header__selects select:focus {
+  outline: none;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 1.2rem;
+}
