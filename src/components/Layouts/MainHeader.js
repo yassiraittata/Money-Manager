@@ -1,5 +1,7 @@
 import React from "react";
 
+import { NavLink } from "react-router-dom";
+
 import classes from "./MainHeader.module.css";
 
 const MainHeader = () => {
@@ -8,14 +10,24 @@ const MainHeader = () => {
       <h1>MoneyManager</h1>
       <nav className={classes.nav}>
         <li>
-          <a href="#" className={classes.link}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? ` ${classes.link} ${classes.active}` : classes.link
+            }
+            to="/transactions"
+          >
             Transactions
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#" className={classes.link}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? ` ${classes.link} ${classes.active}` : classes.link
+            }
+            to="/add-transaction"
+          >
             New Transaction
-          </a>
+          </NavLink>
         </li>
       </nav>
     </header>

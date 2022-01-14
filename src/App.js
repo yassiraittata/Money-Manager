@@ -1,18 +1,11 @@
-import ElementsList from "./components/Elements/ElementsList";
-import AddNewElement from "./components/NewElement/AddNewElement";
-import Card from "./components/UI/Card";
 import Layout from "./components/Layouts/Layout";
+import Router from "./routes/Router";
 
 function App() {
   return (
     <>
       <Layout>
-        <Card>
-          <AddNewElement />
-        </Card>
-        {/* <Card>
-          <ElementsList />
-        </Card> */}
+        <Router />
       </Layout>
     </>
   );
