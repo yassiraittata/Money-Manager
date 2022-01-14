@@ -10,11 +10,13 @@
   justify-content: space-between;
 }
 
-.head a {
-  text-decoration: none;
+.head button {
+  background-color: transparent;
+  border: none;
   color: #5e2073;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .head .active_Button {
@@ -58,6 +60,11 @@
 .control select:focus,
 .detail__form input {
   outline: none;
+}
+
+.control .invalid {
+  background-color: #ffcaca;
+  border-color: #fd5d5d;
 }
 
 .start {

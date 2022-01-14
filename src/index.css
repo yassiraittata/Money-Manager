@@ -17,3 +17,9 @@ html {
 body {
   margin: 0;
 }
+
+.invalid {
+  background-color: #ffcaca;
+  border: 1px solid #fd5d5d;
+  border-color: #fd5d5d;
+}

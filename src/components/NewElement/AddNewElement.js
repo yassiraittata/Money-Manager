@@ -14,24 +14,22 @@ const AddNewElement = (props) => {
       </div> */}
       <div className={classes.container}>
         <div className={classes.head}>
-          <a
-            href="#"
+          <button
             className={`${
               transactionType === "incomes" ? classes.active_Button : ""
             }`}
             onClick={() => setTransactionType("incomes")}
           >
             Incomes
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
             className={`${
               transactionType === "expenses" ? classes.active_Button : ""
             }`}
             onClick={() => setTransactionType("expenses")}
           >
             Expenses
-          </a>
+          </button>
         </div>
 
         {transactionType === "expenses" && <ExpenseForm onActive="true" />}

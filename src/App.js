@@ -7,12 +7,12 @@ function App() {
   return (
     <>
       <Layout>
-        {/* <Card>
-          <AddNewElement />
-        </Card> */}
         <Card>
-          <ElementsList />
+          <AddNewElement />
         </Card>
+        {/* <Card>
+          <ElementsList />
+        </Card> */}
       </Layout>
     </>
   );
