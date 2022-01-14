@@ -1,39 +1,35 @@
 import React, { useState } from "react";
+import AddElemetForm from "./AddElementForm";
 
 import classes from "./AddNewElement.module.css";
-import ExpenseForm from "./ExpenseForm";
-import IncomeForm from "./IncomeForm";
 
 const AddNewElement = (props) => {
-  const [transactionType, setTransactionType] = useState("incomes");
+  const [transactionType, setTransactionType] = useState(1);
 
   return (
     <>
-      {/* <div className={classes.start}>
-        <Button text="Add a new Elemet" />
-      </div> */}
       <div className={classes.container}>
         <div className={classes.head}>
           <button
-            className={`${
-              transactionType === "incomes" ? classes.active_Button : ""
-            }`}
-            onClick={() => setTransactionType("incomes")}
+            className={`${transactionType === 1 ? classes.active_Button : ""}`}
+            onClick={() => setTransactionType(1)}
           >
             Incomes
           </button>
           <button
-            className={`${
-              transactionType === "expenses" ? classes.active_Button : ""
-            }`}
-            onClick={() => setTransactionType("expenses")}
+            className={`${transactionType === 0 ? classes.active_Button : ""}`}
+            onClick={() => setTransactionType(0)}
           >
             Expenses
           </button>
         </div>
 
-        {transactionType === "expenses" && <ExpenseForm onActive="true" />}
-        {transactionType === "incomes" && <IncomeForm onActive="true" />}
+        {transactionType === 0 && (
+          <AddElemetForm type={transactionType} onActive="true" />
+        )}
+        {transactionType === 1 && (
+          <AddElemetForm type={transactionType} onActive="true" />
+        )}
       </div>
     </>
   );
