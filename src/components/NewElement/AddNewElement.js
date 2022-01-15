@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Card from "../UI/Card";
 import AddElemetForm from "./AddElementForm";
 
 import classes from "./AddNewElement.module.css";
@@ -7,7 +8,7 @@ const AddNewElement = (props) => {
   const [transactionType, setTransactionType] = useState(1);
 
   return (
-    <>
+    <Card using="form">
       <div className={classes.container}>
         <div className={classes.head}>
           <button
@@ -31,7 +32,7 @@ const AddNewElement = (props) => {
           <AddElemetForm type={transactionType} onActive="true" />
         )}
       </div>
-    </>
+    </Card>
   );
 };
 

@@ -3,10 +3,15 @@ import Button from "../UI/Button";
 
 import classes from "./ElementItem.module.css";
 
-const ElementItem = () => {
+const ElementItem = (props) => {
+  const className =
+    props.type === 1
+      ? `${classes.element} ${classes.income}`
+      : `${classes.element} ${classes.expense}`;
+
   return (
     <>
-      <div className={`${classes.element} ${classes.income}`}>
+      <div className={className}>
         <h3>Salary</h3>
         <p>$25000</p>
         <p>21/8/2020</p>
@@ -15,7 +20,7 @@ const ElementItem = () => {
         </a>
       </div>
 
-      <div className={`${classes.element} ${classes.expense}`}>
+      <div className={className}>
         <h3>Salary</h3>
         <p>$25000</p>
         <p>25/8/2020</p>

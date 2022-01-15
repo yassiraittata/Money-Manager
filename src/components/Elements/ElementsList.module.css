@@ -23,6 +23,34 @@
   outline: none;
 }
 
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main .icome_item,
+.main .expense_item {
+  flex-grow: 1;
+}
+
+.main .icome_item {
+  margin-right: 1rem;
+}
+
+.main .expense_item {
+  margin-left: 1rem;
+}
+
+.total_amount {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.total_amount label {
+  font-weight: bold;
+}
+
 .footer {
   text-align: center;
   margin-top: 1.2rem;

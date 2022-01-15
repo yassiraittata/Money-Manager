@@ -64,7 +64,7 @@ const AddElemetForm = (props) => {
     expenseFrom = (
       <>
         <div className={`${classes.control} ${classes.detail}`}>
-          <label htmlFor="title">Detail:</label>
+          <label htmlFor="title">Details:</label>
           <a href="#">
             <ion-icon name="add-outline"></ion-icon>
           </a>

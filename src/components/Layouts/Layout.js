@@ -7,10 +7,7 @@ const Layout = (props) => {
   return (
     <>
       <MainHeader />
-      <main>
-        <Card>{props.children}</Card>
-      </main>
-      ;
+      <main>{props.children}</main>;
     </>
   );
 };

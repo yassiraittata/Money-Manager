@@ -3,7 +3,12 @@ import React from "react";
 import classes from "./Card.module.css";
 
 const Card = (props) => {
-  return <div className={classes.card}>{props.children}</div>;
+  const className =
+    props.using === "form"
+      ? `${classes.card} ${classes.card_form}`
+      : `${classes.card}`;
+
+  return <div className={className}>{props.children}</div>;
 };
 
 export default Card;

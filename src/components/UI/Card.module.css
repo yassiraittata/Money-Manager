@@ -1,9 +1,13 @@
 .card {
-  max-width: 800px;
+  max-width: 1200px;
   border-radius: 8px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
   margin: auto;
   /* padding: 1rem; */
   background-color: #fff;
   margin-bottom: 1rem;
+}
+
+.card_form {
+  max-width: 800px;
 }
