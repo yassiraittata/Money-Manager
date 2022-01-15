@@ -7,7 +7,7 @@ const Router = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="/transactions" />} />
+        {/* <Route path="/" element={<Navigate to="/transactions" />} /> */}
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/add-transaction" element={<AddTransaction />} />
       </Routes>
