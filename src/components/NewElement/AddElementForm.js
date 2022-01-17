@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+import { transactionActions as actions } from "../../store/store";
 
 import Button from "../UI/Button";
 
 import classes from "./AddNewElement.module.css";
 
 const AddElemetForm = (props) => {
-  const ExpenseForm = useFormik({
+  const dispatch = useDispatch();
+  // Showing detail form:
+  const [isShowNestedForm, setIsShowNestedForm] = useState(false);
+  // List of the items
+  const [detailExpense, setDetailExpense] = useState([]);
+
+  const transactionFormik = useFormik({
     initialValues: {
       title: "",
       amount: "",
@@ -22,66 +31,178 @@ const AddElemetForm = (props) => {
     onSubmit(values) {
       if (props.type === 0) {
         const expense = {
+          id: "exp" + Math.ceil(Math.random() * 1000000),
           title: values.title,
           amount: values.amount,
           date: values.date,
+          detail: detailExpense,
         };
+        dispatch(actions.addExpense({ expense }));
         console.log("expense");
       } else {
         const income = {
+          id: "inc" + Math.ceil(Math.random() * 1000000),
           title: values.title,
           amount: values.amount,
           date: values.date,
         };
+        dispatch(actions.addIncome({ income }));
         console.log("income");
       }
-
-      //   console.log(expense);
     },
   });
 
-  // console.log(ExpenseForm.errors);
-  // console.log(ExpenseForm.touched);
+  // console.log(transactionFormik.errors);
+  // console.log(transactionFormik.touched);
 
+  const detailFormik = useFormik({
+    initialValues: {
+      item: "",
+      price: "",
+    },
+    validationSchema: Yup.object({
+      item: Yup.string().required(),
+      price: Yup.number().required(),
+    }),
+  });
+
+  // Classes of all inputs
   const titleClasses =
-    ExpenseForm.errors.title && ExpenseForm.touched.title
+    transactionFormik.errors.title && transactionFormik.touched.title
       ? `${classes.invalid}`
       : "";
 
   const amountClasses =
-    ExpenseForm.errors.amount && ExpenseForm.touched.amount
+    transactionFormik.errors.amount && transactionFormik.touched.amount
       ? `${classes.invalid}`
       : "";
 
   const dateClasses =
-    ExpenseForm.errors.date && ExpenseForm.touched.date
+    transactionFormik.errors.date && transactionFormik.touched.date
       ? `${classes.invalid}`
       : "";
 
+  const itemClasses =
+    detailFormik.errors.item && detailFormik.touched.item
+      ? `${classes.invalid}`
+      : "";
+
+  const priceClasses =
+    detailFormik.errors.price && detailFormik.touched.price
+      ? `${classes.invalid}`
+      : "";
+  // End region
+
   let expenseFrom;
+
+  const submitHandlerNestedForm = (e) => {
+    e.preventDefault();
+    // console.log("hello");
+    const detailItem = {
+      id: Math.random() * 1000000,
+      item: detailFormik.values.item,
+      price: detailFormik.values.price,
+    };
+
+    setDetailExpense((prevState) => {
+      return [...prevState, detailItem];
+    });
+
+    detailFormik.values.item = "";
+    detailFormik.values.price = "";
+    detailFormik.errors = {};
+    detailFormik.touched = {};
+    console.log(detailExpense);
+  };
+
+  const deleteItem = (id) => {
+    setDetailExpense((prevState) => {
+      return prevState.filter((el) => el.id !== id);
+    });
+  };
 
   if (props.type === 0) {
     expenseFrom = (
       <>
         <div className={`${classes.control} ${classes.detail}`}>
           <label htmlFor="title">Details:</label>
-          <a href="#">
+          <button
+            onClick={() => {
+              setIsShowNestedForm(true);
+            }}
+          >
             <ion-icon name="add-outline"></ion-icon>
-          </a>
+          </button>
         </div>
 
-        <div className={classes.detail__container}>
-          <p>New Car</p>
-          <p>$2500</p>
-          <a href="#">
-            <ion-icon name="close-outline"></ion-icon>
-          </a>
-        </div>
+        {isShowNestedForm && (
+          <>
+            <form
+              className={classes.detail__form}
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="text"
+                id="item"
+                name="item"
+                maxLength="20"
+                placeholder="Item"
+                className={itemClasses}
+                onChange={detailFormik.handleChange}
+                onBlur={detailFormik.handleBlur}
+                value={detailFormik.values.item}
+              />
+              <input
+                type="number"
+                id="price"
+                name="price"
+                placeholder="Price"
+                className={priceClasses}
+                onChange={detailFormik.handleChange}
+                onBlur={detailFormik.handleBlur}
+                value={detailFormik.values.price}
+              />
+              {detailFormik.values.item !== "" &&
+                detailFormik.values.price !== "" && (
+                  <Button
+                    type="button"
+                    text="Add"
+                    onClick={submitHandlerNestedForm}
+                  />
+                )}
+              <Button
+                text="Cancel"
+                type="button"
+                onClick={() => {
+                  setIsShowNestedForm(false);
+                }}
+              />
+            </form>
+
+            {detailExpense.map((el) => {
+              return (
+                <>
+                  <div key={el.id} className={classes.detail__container}>
+                    <p>{el.item}</p>
+                    <p>{el.price}</p>
+                    <button
+                      onClick={() => {
+                        deleteItem(el.id);
+                      }}
+                    >
+                      <ion-icon name="close-outline"></ion-icon>
+                    </button>
+                  </div>
+                </>
+              );
+            })}
+          </>
+        )}
       </>
     );
   }
   return (
-    <form className={classes.form} onSubmit={ExpenseForm.handleSubmit}>
+    <form className={classes.form} onSubmit={transactionFormik.handleSubmit}>
       <div className={classes.control}>
         <label htmlFor="title">Title:</label>
         <input
@@ -90,8 +211,8 @@ const AddElemetForm = (props) => {
           id="title"
           name="title"
           // placeholder="Title"
-          onChange={ExpenseForm.handleChange}
-          onBlur={ExpenseForm.handleBlur}
+          onChange={transactionFormik.handleChange}
+          onBlur={transactionFormik.handleBlur}
         />
       </div>
 
@@ -103,8 +224,8 @@ const AddElemetForm = (props) => {
           id="amount"
           name="amount"
           // placeholder="Amount"
-          onChange={ExpenseForm.handleChange}
-          onBlur={ExpenseForm.handleBlur}
+          onChange={transactionFormik.handleChange}
+          onBlur={transactionFormik.handleBlur}
         />
       </div>
 
@@ -117,8 +238,8 @@ const AddElemetForm = (props) => {
           name="date"
           min="2018-01-01"
           max="2023-12-31"
-          onChange={ExpenseForm.handleChange}
-          onBlur={ExpenseForm.handleBlur}
+          onChange={transactionFormik.handleChange}
+          onBlur={transactionFormik.handleBlur}
         ></input>
       </div>
 

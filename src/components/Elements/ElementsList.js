@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import ElementItem from "./ElementItem";
@@ -6,6 +8,10 @@ import ElementItem from "./ElementItem";
 import classes from "./ElementsList.module.css";
 
 const ElementsList = () => {
+  const incomesnState = useSelector((state) => state.incomes);
+  const expensesnState = useSelector((state) => state.expenses);
+  console.log(expensesnState);
+
   return (
     <Card using="list">
       <div className={classes.transactions_list}>
@@ -44,14 +50,29 @@ const ElementsList = () => {
               <label>Total:</label>
               <label>$500</label>
             </div>
-            <ElementItem type={1} />
+            {incomesnState.map((el) => (
+              <ElementItem
+                type={1}
+                title={el.title}
+                amount={el.amount}
+                date={el.date}
+              />
+            ))}
           </div>
           <div className={classes.expense_item}>
             <div className={classes.total_amount}>
               <label>Total:</label>
               <label>$500</label>
             </div>
-            <ElementItem type={0} />
+            {expensesnState.map((el) => (
+              <ElementItem
+                type={0}
+                title={el.title}
+                amount={el.amount}
+                date={el.date}
+                detail={el.detail}
+              />
+            ))}
           </div>
         </div>
 

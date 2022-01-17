@@ -62,9 +62,9 @@
   outline: none;
 }
 
-.control .invalid {
+.invalid {
   background-color: #ffcaca;
-  border-color: #fd5d5d;
+  border-color: #fd5d5d !important;
 }
 
 .start {
@@ -77,10 +77,14 @@
   text-align: center;
 }
 
-.detail a {
+.detail button,
+.detail__container button {
   font-size: 1.5rem;
   font-size: bold;
   color: inherit;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .detail__form {
@@ -103,6 +107,6 @@
   margin-bottom: 1rem;
 }
 
-.detail__container a {
+.detail__container button {
   justify-self: end;
 }

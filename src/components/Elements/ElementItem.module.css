@@ -1,6 +1,6 @@
 .element {
   display: grid;
-  grid-template-columns: 3fr 1fr 2fr 0.5fr;
+  grid-template-columns: 3fr 1fr 2fr 0.5fr 0.5fr;
   align-items: center;
 
   padding: 0.5rem 0.7rem;
@@ -19,10 +19,24 @@
   color: #00ab00;
 }
 
-a {
+.element button {
   font-size: 1.5rem;
   color: #5e2073;
   text-decoration: none;
   justify-self: center;
   align-self: baseline;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.detail__items {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  padding-left: 2rem;
+}
+
+.detail__items li {
+  display: flex;
+  justify-content: space-between;
 }
