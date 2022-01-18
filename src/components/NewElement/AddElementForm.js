@@ -97,6 +97,7 @@ const AddElemetForm = (props) => {
 
   const submitHandlerNestedForm = (e) => {
     e.preventDefault();
+    console.log("hello");
     // console.log("hello");
     const detailItem = {
       id: Math.random() * 1000000,
@@ -126,21 +127,19 @@ const AddElemetForm = (props) => {
       <>
         <div className={`${classes.control} ${classes.detail}`}>
           <label htmlFor="title">Details:</label>
-          <button
+          <input
+            className={classes.detail__add_btn}
+            type="button"
             onClick={() => {
               setIsShowNestedForm(true);
             }}
-          >
-            <ion-icon name="add-outline"></ion-icon>
-          </button>
+            value="+"
+          />
         </div>
 
         {isShowNestedForm && (
           <>
-            <form
-              className={classes.detail__form}
-              onSubmit={(e) => e.preventDefault()}
-            >
+            <div className={classes.detail__form}>
               <input
                 type="text"
                 id="item"
@@ -164,20 +163,28 @@ const AddElemetForm = (props) => {
               />
               {detailFormik.values.item !== "" &&
                 detailFormik.values.price !== "" && (
-                  <Button
+                  // <Button
+                  //   type="button"
+                  //   text="Add"
+                  //   onClick={submitHandlerNestedForm}
+                  // />
+                  <input
                     type="button"
-                    text="Add"
+                    value="Add"
+                    className={`${classes.detail__form_btn} button`}
                     onClick={submitHandlerNestedForm}
                   />
                 )}
-              <Button
-                text="Cancel"
+              <input
                 type="button"
+                value="Cancel"
+                className={`${classes.detail__form_btn} button`}
+                onClick={submitHandlerNestedForm}
                 onClick={() => {
                   setIsShowNestedForm(false);
                 }}
               />
-            </form>
+            </div>
 
             {detailExpense.map((el) => {
               return (

@@ -74,7 +74,16 @@
 .detail {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-align: center;
+}
+
+.detail .detail__add_btn {
+  width: 10%;
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 .detail button,
@@ -96,6 +105,11 @@
 
 .detail__form input {
   margin-right: 0.5rem;
+}
+
+.detail__form .detail__form_btn {
+  color: #fff;
+  width: 20%;
 }
 
 .detail__container {

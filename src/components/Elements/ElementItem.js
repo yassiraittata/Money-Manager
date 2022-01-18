@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import Button from "../UI/Button";
+import { useDispatch } from "react-redux";
+import { transactionActions } from "../../store/store";
 
 import classes from "./ElementItem.module.css";
 
 const ElementItem = (props) => {
   const [showDetail, setShowDetail] = useState(false);
-  console.log(props);
+  const dispatch = useDispatch();
+
+  const deleteTransaction = () => {
+    if (props.type === 1) {
+      dispatch(transactionActions.deleteIncome(props.id));
+    }
+    if (props.type === 0) {
+      dispatch(transactionActions.deleteExpense(props.id));
+    }
+  };
 
   const className =
     props.type === 1
@@ -18,7 +28,7 @@ const ElementItem = (props) => {
         <h3>{props.title}</h3>
         <p>${props.amount}</p>
         <p>{props.date}</p>
-        <button>
+        <button onClick={deleteTransaction}>
           <ion-icon name="trash-outline"></ion-icon>
         </button>
         {props.type === 0 && !showDetail && (
@@ -31,16 +41,19 @@ const ElementItem = (props) => {
             <ion-icon name="caret-down-outline"></ion-icon>
           </button>
         )}
-        {showDetail &&
-          props.detail &&
-          props.detail.map((el) => {
-            <ul className={classes.detail__items}>
-              <li>
-                <h4>{el.item}</h4>
-                <p>${el.price}</p>
-              </li>
-            </ul>;
-          })}
+        {/* <p>Hello</p> */}
+        {showDetail && props.detail && props.detail.length > 0 && (
+          <ul className={classes.detail__items}>
+            {props.detail.map((el) => {
+              return (
+                <li>
+                  <h4>{el.item}</h4>
+                  <h4>${el.price}</h4>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </>
   );

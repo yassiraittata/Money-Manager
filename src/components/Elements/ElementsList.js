@@ -10,7 +10,9 @@ import classes from "./ElementsList.module.css";
 const ElementsList = () => {
   const incomesnState = useSelector((state) => state.incomes);
   const expensesnState = useSelector((state) => state.expenses);
-  console.log(expensesnState);
+  const totalExpeses = useSelector((state) => state.expensesAmount);
+  const totalIncomes = useSelector((state) => state.incomesAmount);
+  console.log(totalIncomes, totalExpeses);
 
   return (
     <Card using="list">
@@ -48,11 +50,12 @@ const ElementsList = () => {
           <div className={classes.icome_item}>
             <div className={classes.total_amount}>
               <label>Total:</label>
-              <label>$500</label>
+              <label>${totalIncomes}</label>
             </div>
             {incomesnState.map((el) => (
               <ElementItem
                 type={1}
+                id={el.id}
                 title={el.title}
                 amount={el.amount}
                 date={el.date}
@@ -62,15 +65,16 @@ const ElementsList = () => {
           <div className={classes.expense_item}>
             <div className={classes.total_amount}>
               <label>Total:</label>
-              <label>$500</label>
+              <label>${totalExpeses}</label>
             </div>
             {expensesnState.map((el) => (
               <ElementItem
                 type={0}
+                id={el.id}
                 title={el.title}
                 amount={el.amount}
                 date={el.date}
-                detail={el.detail}
+                detail={el.detail ? el.detail : null}
               />
             ))}
           </div>
