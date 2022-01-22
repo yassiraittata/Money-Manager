@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { transactionActions } from "../../store/store";
 
+import { deleteIncome, deleteExpense } from "../../store/actions";
+
 import classes from "./ElementItem.module.css";
 
 const ElementItem = (props) => {
@@ -10,10 +12,10 @@ const ElementItem = (props) => {
 
   const deleteTransaction = () => {
     if (props.type === 1) {
-      dispatch(transactionActions.deleteIncome(props.id));
+      dispatch(deleteIncome(props.id));
     }
     if (props.type === 0) {
-      dispatch(transactionActions.deleteExpense(props.id));
+      dispatch(deleteExpense(props.id));
     }
   };
 
@@ -41,7 +43,7 @@ const ElementItem = (props) => {
             <ion-icon name="caret-down-outline"></ion-icon>
           </button>
         )}
-        {/* <p>Hello</p> */}
+
         {showDetail && props.detail && props.detail.length > 0 && (
           <ul className={classes.detail__items}>
             {props.detail.map((el) => {

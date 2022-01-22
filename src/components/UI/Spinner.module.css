@@ -1,0 +1,26 @@
+.spinner {
+  text-align: center;
+}
+
+.spinner div {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  background-color: transparent;
+  border-top: 0.5rem solid #5e2073;
+  border-bottom: 0.5rem solid #5e2073;
+  border-right: 0.5rem solid transparent;
+  border-left: 0.5rem solid transparent;
+  border-radius: 50%;
+  animation: rotate .5s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

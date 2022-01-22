@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
+import * as Yup from "yup";
 import { transactionActions as actions } from "../../store/store";
+import { addIncome, addExpense } from "../../store/actions";
 
 import Button from "../UI/Button";
 
@@ -15,6 +19,8 @@ const AddElemetForm = (props) => {
   const [isShowNestedForm, setIsShowNestedForm] = useState(false);
   // List of the items
   const [detailExpense, setDetailExpense] = useState([]);
+
+  const navigate = useNavigate();
 
   const transactionFormik = useFormik({
     initialValues: {
@@ -31,23 +37,25 @@ const AddElemetForm = (props) => {
     onSubmit(values) {
       if (props.type === 0) {
         const expense = {
-          id: "exp" + Math.ceil(Math.random() * 1000000),
           title: values.title,
           amount: values.amount,
           date: values.date,
           detail: detailExpense,
         };
-        dispatch(actions.addExpense({ expense }));
-        console.log("expense");
+
+        //Add Expense
+        dispatch(addExpense(expense));
+        navigate("/transactions");
       } else {
         const income = {
-          id: "inc" + Math.ceil(Math.random() * 1000000),
           title: values.title,
           amount: values.amount,
           date: values.date,
         };
-        dispatch(actions.addIncome({ income }));
-        console.log("income");
+
+        // Add Income
+        dispatch(addIncome(income));
+        navigate("/transactions");
       }
     },
   });

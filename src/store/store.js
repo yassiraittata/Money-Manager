@@ -1,4 +1,5 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { db } from "../firebase";
 
 const initialState = {
   incomes: [],
@@ -12,8 +13,24 @@ const TransactionSlice = createSlice({
   initialState,
   name: "Transaction Slice",
   reducers: {
+    fetchIncomes(state, action) {
+      console.log(action.payload);
+      state.incomes = action.payload;
+      const incomesAmount = state.incomes.map((el) => el.amount);
+      const total = incomesAmount.reduce((el, cur) => el + cur, 0);
+      state.incomesAmount = total;
+    },
+
+    fetchExpenses(state, action) {
+      console.log(action.payload);
+      state.expenses = action.payload;
+      const expensesAmount = state.expenses.map((el) => el.amount);
+      const total = expensesAmount.reduce((el, cur) => el + cur, 0);
+      state.expensesAmount = total;
+    },
+
     addIncome(state, action) {
-      // console.log("the income was added");
+      console.log(state.incomes);
       state.incomesAmount = state.incomesAmount + action.payload.income.amount;
       state.totalAmount = state.totalAmount + action.payload.income.amount;
       state.incomes.push(action.payload.income);
@@ -27,8 +44,8 @@ const TransactionSlice = createSlice({
     },
 
     deleteIncome(state, action) {
-      console.log(action);
-
+      console.log("id :", action.payload);
+      console.log(state.incomes);
       const income = state.incomes.find((el) => el.id === action.payload);
 
       state.incomesAmount = state.incomesAmount - income.amount;
@@ -40,6 +57,7 @@ const TransactionSlice = createSlice({
 
     deleteExpense(state, action) {
       console.log(action);
+
       const expense = state.expenses.find((el) => el.id === action.payload);
 
       state.expensesAmount = state.expensesAmount - expense.amount;
@@ -48,8 +66,30 @@ const TransactionSlice = createSlice({
       const updatedList = state.expenses.filter((el) => el.id !== expense.id);
       state.expenses = updatedList;
     },
+
+    // filterByDate(state, action) {
+    //   console.log(action.payload);
+    //   const fitlerdIncomes = state.incomes.map((el) => {
+    //     const month = el.date.toLocaleString("en-US", { month: "long" });
+    //     if (month === action.payload) {
+    //       return el;
+    //     }
+    //   });
+
+    //   const fitlerdExpenses = state.expenses.map((el) => {
+    //     const month = el.date.toLocaleString("en-US", { month: "long" });
+    //     if (month === action.payload) {
+    //       return el;
+    //     }
+    //   });
+
+    //   state.incomes = fitlerdIncomes;
+    //   state.expenses = fitlerdExpenses;
+    // },
   },
 });
+
+// Action creator: Thunks
 
 const store = configureStore({
   reducer: TransactionSlice.reducer,
